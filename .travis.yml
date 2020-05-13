@@ -7,7 +7,7 @@ env:
   jobs:
     - RUNTIME=win-x64
 install:
-  - cd ~/build/clarkx86 && git clone https://github.com/clarkx86/common_ci-scripts.git && cd common_ci-scripts
+  - cd ~/build/clarkx86 && git clone https://github.com/clarkx86/common_ci-scripts.git && cd common_ci-scripts && chmod +x ./*
   - ls -al
   - REPO_NAME=$(./get_repo-name.sh $TRAVIS_REPO_SLUG)
   - TAG_CLEAN=$(./get_tag_clean.sh $TRAVIS_TAG)
