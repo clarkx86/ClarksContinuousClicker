@@ -14,10 +14,10 @@ install:
   - ASSEMBLY_VERSION=$(./format_assembly-version.sh $TAG_CLEAN $TRAVIS_BUILD_NUMBER)
   - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
   - cd ~/build/${TRAVIS_REPO_SLUG}
-  - echo REPO_NAME
-  - echo TAG_CLEAN
-  - echo ASSEMBLY_VERSION
-  - echo ARTIFACT_NAME
+  - echo $REPO_NAME
+  - echo $TAG_CLEAN
+  - echo $ASSEMBLY_VERSION
+  - echo $ARTIFACT_NAME
 script:
   - dotnet publish ClarksContinuousClicker.csproj -c Release -r ${RUNTIME} /property:Version=${ASSEMBLY_VERSION}
 before_deploy:
