@@ -61,11 +61,6 @@ namespace ClarksContinuousClicker
                 };
             }
 
-            if (vMouse.Interval == null)
-            {
-                System.Console.WriteLine("Interval must be greater than 0.");
-            }
-
             vMouse.Enable();
 
             Console.WriteLine("Virtual mouse enabled:\n\tButton:\t\t{0}\n\tInterval:\t{1}\n\nPress \"ENTER\" to toggle virtual mouse or \"ESCAPE\" to quit.\n", Enum.GetName(typeof(MouseButton), vMouse.Button), vMouse.Interval);
@@ -78,16 +73,20 @@ namespace ClarksContinuousClicker
                     {
                         case ConsoleKey.Enter:
                             vMouse.Disable();
-                            Console.WriteLine("Virtual mouse paused.");
+                            Console.WriteLine("Virtual mouse paused");
 
                             bool result = false;
                             while (!result)
                             {
-                                result = Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter ? true : false;
+                                if (Console.KeyAvailable)
+                                {
+                                    ConsoleKey key = Console.ReadKey(true).Key;
+                                    result = key == ConsoleKey.Enter || key == ConsoleKey.Escape ? true : false;
+                                }
                             }
 
                             vMouse.Enable();
-                            Console.WriteLine("Virtual Mouse resumed.");
+                            Console.WriteLine("Virtual Mouse resumed");
                             break;
 
                         case ConsoleKey.Escape:

@@ -1,0 +1,24 @@
+os: linux
+dist: xenial
+language: csharp
+dotnet: 3.1.201
+mono: none
+env:
+  jobs:
+    - RUNTIME=win-x64
+install:
+  - cd ~/build/clarkx86 && git clone https://github.com/clarkx86/common_ci-scripts.git
+  - REPO_NAME=./get_repo-name.sh $TRAVIS_REPO_SLUG
+  - TAG_CLEAN=./get_tag_clean.sh $TRAVIS_TAG
+  - ASSEMBLY_VERSION=./format_assembly-version.sh $TAG_CLEAN $TRAVIS_BUILD_NUMBER
+  - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
+  - cd ~/build/${TRAVIS_REPO_SLUG}
+  - echo REPO_NAME
+  - echo TAG_CLEAN
+  - echo ASSEMBLY_VERSION
+  - echo ARTIFACT_NAME
+script:
+  - dotnet publish ClarksContinuousClicker.csproj -c Release -r ${RUNTIME} /property:Version=${ASSEMBLY_VERSION}
+before_deploy:
+  - cd ~/build/${TRAVIS_REPO_SLUG}/bin/Release/netcoreapp3.1/${RUNTIME}/publish
+  - zip ${ARTIFACT_NAME}.zip ./*

@@ -3,6 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishSingleFile Condition="'$(OutputType)' == 'Exe' And '$(Configuration)' == 'Release'">true</PublishSingleFile>
+    <RootNamespace>ClarksContinuousClicker</RootNamespace>
+    <Configurations>Debug;Release;</Configurations>
+    <Authors>clarkx86</Authors>
+    <RepositoryUrl>https://github.com/clarkx86/clarkscontinuousclicker</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
