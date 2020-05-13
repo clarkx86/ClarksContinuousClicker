@@ -8,9 +8,9 @@ env:
     - RUNTIME=win-x64
 install:
   - cd ~/build/clarkx86 && git clone https://github.com/clarkx86/common_ci-scripts.git
-  - REPO_NAME=./get_repo-name.sh $TRAVIS_REPO_SLUG
-  - TAG_CLEAN=./get_tag_clean.sh $TRAVIS_TAG
-  - ASSEMBLY_VERSION=./format_assembly-version.sh $TAG_CLEAN $TRAVIS_BUILD_NUMBER
+  - REPO_NAME=$(./get_repo-name.sh $TRAVIS_REPO_SLUG)
+  - TAG_CLEAN=$(./get_tag_clean.sh $TRAVIS_TAG)
+  - ASSEMBLY_VERSION=$(./format_assembly-version.sh $TAG_CLEAN $TRAVIS_BUILD_NUMBER)
   - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
   - cd ~/build/${TRAVIS_REPO_SLUG}
   - echo REPO_NAME
