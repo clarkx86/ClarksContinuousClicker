@@ -8,8 +8,9 @@ namespace ClarksContinuousClicker
     {
         public double Interval;
         public MouseButton Button;
-        public Vector2d Position;
+        public Vector2d Position = new Vector2d();
         public bool Enabled { get; private set; }
+        public bool Move = false;
         private Timer _timer = new Timer();
         public delegate void ActionHandler(object sender, EventArgs e);
         public event ActionHandler OnAction; 

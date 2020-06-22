@@ -18,8 +18,8 @@ namespace ClarksContinuousClicker
             VirtualMouse vMouse = new VirtualMouse();
 
             OptionSet options = new OptionSet()
-                .Add("h|help", "Display an overview of available parameters.", (string h) => { printHelp = h != null; } )
-                .Add("v", "Whether to enable verbosity.", (string v) => { _verbose = v != null; } )
+                .Add("h|help", "Display an overview of available parameters.", (string h) => { printHelp = h != null; })
+                .Add("v", "Whether to enable verbosity.", (string v) => { _verbose = v != null; })
                 .Add("b=|mouse-button=", "Mouse button to virtually click.", (string value) =>
                 {
                     switch (value.ToLower())
@@ -43,8 +43,8 @@ namespace ClarksContinuousClicker
                     }
                 })
                 .Add("i=|interval=", "Interval to press mouse button in milliseconds.", (uint value) => { vMouse.Interval = value; })
-                .Add("x:", "(Optional) X coordinate to place mouse cursor.", (uint x) => { vMouse.Position.X = (int)x; })
-                .Add("y:", "(Optional) Y coordinate to place mouse cursor.", (uint y) => { vMouse.Position.Y = (int)y; });
+                .Add("x:", "(Optional) X coordinate to place mouse cursor.", (uint x) => { vMouse.Position.X = (int)x; vMouse.Move = true; })
+                .Add("y:", "(Optional) Y coordinate to place mouse cursor.", (uint y) => { vMouse.Position.Y = (int)y; vMouse.Move = true; });
             List<string> extraOptions = options.Parse(args);
 
             if (printHelp)
@@ -81,7 +81,7 @@ namespace ClarksContinuousClicker
                                 if (Console.KeyAvailable)
                                 {
                                     ConsoleKey key = Console.ReadKey(true).Key;
-                                    result = key == ConsoleKey.Enter || key == ConsoleKey.Escape ? true : false;
+                                    result = (key == ConsoleKey.Enter) || (key == ConsoleKey.Escape) ? true : false;
                                 }
                             }
 
